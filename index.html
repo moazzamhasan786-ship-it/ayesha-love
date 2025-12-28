@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Ayesha 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', cursive;
+  color: #ffb6d9;
+  text-align: center;
+}
+
+/* Animated background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+    url("https://drive.google.com/uc?export=view&id=1rKZ69abWF1PlPS7WZQTu-Ue2jTOCUas3")
+    center/cover no-repeat;
+  filter: blur(6px);
+  transform: scale(1.1);
+  animation: zoomBg 20s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes zoomBg {
+  from { transform: scale(1.1); }
+  to { transform: scale(1.2); }
+}
+
+/* Main text */
+#text {
+  font-size: 26px;
+  max-width: 90%;
+  line-height: 1.6;
+  text-shadow: 0 0 12px hotpink, 0 0 25px deeppink;
+  z-index: 2;
+}
+
+/* Quotes */
+#quote {
+  position: absolute;
+  bottom: 60px;
+  font-size: 18px;
+  opacity: 0;
+  text-shadow: 0 0 8px pink;
+}
+
+/* Ending */
+#ending {
+  display: none;
+  font-size: 32px;
+  text-shadow: 0 0 20px hotpink;
+  animation: glow 2s infinite alternate, fadeIn 3s ease forwards;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px pink; }
+  to { text-shadow: 0 0 35px hotpink; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Cursor */
+.cursor {
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="text"></div>
+<div id="quote"></div>
+<div id="ending">
+Made only for Ayesha 💖<br>
+<span style="font-size:22px;">Forever yours, Moazzam 💫</span>
+</div>
+
+<!-- Background music -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Play music on tap
+document.body.addEventListener("click", () => {
+  document.getElementById("music").play();
+});
+
+// Typing message
+const message =
+"Hey Ayesha 💖\n\n" +
+"Every time you smile,\n" +
+"the world feels softer ✨\n\n" +
+"You are my favorite thought,\n" +
+"my peace,\n" +
+"and my forever 🫶\n\n" +
+"Some hearts search…\n" +
+"mine found you 💫";
+
+let i = 0;
+function typeWriter() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML =
+      message.substring(0, i + 1).replace(/\n/g, "<br>") +
+      "<span class='cursor'>|</span>";
+    i++;
+    setTimeout(typeWriter, 50);
+  } else {
+    setTimeout(showEnding, 4000);
+  }
+}
+typeWriter();
+
+// Love quotes
+const quotes = [
+  "You are my today and all my tomorrows 💕",
+  "In your smile, I found my home 🏡",
+  "Loving you feels like magic ✨",
+  "You’re the reason my heart believes 💖",
+  "Every love story is beautiful, but ours is my favorite 🌸"
+];
+
+let q = 0;
+setInterval(() => {
+  const qb = document.getElementById("quote");
+  qb.style.opacity = 0;
+  setTimeout(() => {
+    qb.innerText = quotes[q];
+    qb.style.opacity = 1;
+    q = (q + 1) % quotes.length;
+  }, 500);
+}, 4000);
+
+// Ending
+function showEnding() {
+  document.getElementById("text").style.display = "none";
+  document.getElementById("quote").style.display = "none";
+  document.getElementById("ending").style.display = "block";
+}
+
+// Floating hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  heart.style.color = "#ff4d88";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
